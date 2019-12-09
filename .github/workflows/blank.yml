@@ -13,6 +13,8 @@ jobs:
       run: echo Hello, world!
     - name: Docker hello world!
       uses: docker://hello-world:latest
+      with:
+        entrypoint: ls -lf 
     - name: Run a multi-line script
       run: |
         docker ps -a
