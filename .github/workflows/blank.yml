@@ -15,5 +15,6 @@ jobs:
       uses: docker://hello-world:latest
     - name: Run a multi-line script
       run: |
+        docker ps -a
         echo Add other actions to build,
         echo test, and deploy your project.
