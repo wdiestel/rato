@@ -12,7 +12,7 @@ jobs:
     - name: Run a one-line script
       run: echo Hello, world!
     - name: Docker hello world!
-      uses: docker://hello-world:latest
+      uses: docker://ubuntu:latest
       with:
         args: ls -lf
     - name: Run a multi-line script
