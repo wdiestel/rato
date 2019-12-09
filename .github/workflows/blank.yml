@@ -14,7 +14,7 @@ jobs:
     - name: Docker hello world!
       uses: docker://hello-world:latest
       with:
-        entrypoint: bash -c "ls -lf"
+        entrypoint: bash -c \"ls -lf\"
     - name: Run a multi-line script
       run: |
         docker ps -a
