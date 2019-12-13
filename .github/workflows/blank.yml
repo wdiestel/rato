@@ -20,9 +20,10 @@ jobs:
     - uses: actions/github-script@0.3.0
       with:
         github-token: ${{secrets.GITHUB_TOKEN}}
+        debug: true
         script: |
           const ref = await github.git.getRef({...context.repo, ref: 'heads/master'})
-          console.log(ref.keys())
+          console.log(ref)
           await github.git.setRef({...context.repo, sha: ref.sha, ref: 'tags/formikita', force: 'yes'})
 
 #    - uses: actions/github-script@0.3.0
