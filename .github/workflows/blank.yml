@@ -23,8 +23,9 @@ jobs:
         debug: true
         script: |
           const ref = await github.git.getRef({...context.repo, ref: 'heads/master'})
-          console.log(ref)
-          await github.git.updateRef({...context.repo, sha: ref, ref: 'tags/formikita', force: 'yes'})
+          const sha = ref.data.object.sha
+          console.log(sha)
+          await github.git.updateRef({...context.repo, sha: sha, ref: 'tags/formikita', force: 'yes'})
 
 #    - uses: actions/github-script@0.3.0
 #      with:
