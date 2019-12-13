@@ -22,6 +22,7 @@ jobs:
         github-token: ${{secrets.GITHUB_TOKEN}}
         script: |
           const ref = github.git.getRef({...context.repo, ref: 'heads/master'})
+          console.log(ref)
           github.git.setRef({...context.repo, sha: ref.object.sha, ref: 'tags/formikita', force: 'yes'})
 
 #    - uses: actions/github-script@0.3.0
