@@ -12,9 +12,13 @@ jobs:
     - name: Eltrovu, kiuj XML-dosieroj ŝanĝiĝis
       run: git show —name-only —summary —oneline formikita.. | grep "\.xml$" | uniq
     - name: Rezulto de antaŭa paŝo...
-      #uses: docker://hello-world:latest
       run: cat
+    - name: Docker hello world!
+      uses: docker://ubuntu:latest
+      with:
+        args: ls -lf
     - name: Run a multi-line script
       run: |
+        docker ps -a
         echo Add other actions to build,
         echo test, and deploy your project.
