@@ -22,7 +22,7 @@ jobs:
         github-token: ${{secrets.GITHUB_TOKEN}}
         script: |
           const get_req = github.git.getRef({...context.repo, ref: 'heads/master'})
-          const ref = await github.request(get_req)
+          const ref = await github.paginate(get_req)
           console.log(ref)
           github.git.setRef({...context.repo, sha: ref.object.sha, ref: 'tags/formikita', force: 'yes'})
 
