@@ -21,7 +21,8 @@ jobs:
       with:
         github-token: ${{secrets.GITHUB_TOKEN}}
         script: |
-          github.git.listMatchingRefs({ref: 'formikita'})        
+          github.git.listMatchingRefs({ref: 'formikita'})
+              
 #    - name: Movu etikedon al aktuala pozicio
 #      run: |
 #        git tag formikita -f
