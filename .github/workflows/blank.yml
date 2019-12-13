@@ -17,8 +17,19 @@ jobs:
       uses: docker://ubuntu:latest
       with:
         args: ls -lf
-    - name: Movu etikedon al aktuala pozicio
-      run: |
-        git tag formikita -f
-        git push --tags
-        
+    - uses: actions/github-script@0.3.0
+      with:
+        github-token: ${{secrets.GITHUB_TOKEN}}
+        script: |
+          github.git.listMatchingRefs({ref: 'formikita'})        
+#    - name: Movu etikedon al aktuala pozicio
+#      run: |
+#        git tag formikita -f
+#        git push --tags
+
+
+# https://github.com/eine/actions/blob/3f0701c2f20780984590bd955839a38b75c96668/.github/workflows/push.yml#L33-L48
+# https://github.com/actions/github-script
+# https://github.com/actions/github
+# https://developer.github.com/v3/git/tags/
+# https://developer.github.com/v3/git/refs/#create-a-reference
