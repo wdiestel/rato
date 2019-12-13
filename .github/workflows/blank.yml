@@ -9,10 +9,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - name: Run a one-line script
-      run: echo Hello, world!
-    - name: Docker hello world!
-      uses: docker://hello-world:latest
+    - name: Eltrovu, kiuj XML-dosieroj ŝanĝiĝis
+      run: git show —name-only —summary —oneline formikita.. | grep "\.xml$" | uniq
+    - name: Rezulto de antaŭa paŝo...
+      #uses: docker://hello-world:latest
+      run: cat
     - name: Run a multi-line script
       run: |
         echo Add other actions to build,
