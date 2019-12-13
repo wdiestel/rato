@@ -10,7 +10,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Eltrovu, kiuj XML-dosieroj ŝanĝiĝis
-      run: git show —name-only —summary —oneline formikita.. | grep "\.xml$" | uniq
+      run: git show --name-only --oneline formikita.. | grep "\.xml$" | uniq
     - name: Rezulto de antaŭa paŝo...
       run: cat
     - name: Docker hello world!
