@@ -30,6 +30,7 @@ jobs:
           await github.git.updateRef({...context.repo, sha: sha, ref: 'tags/formikita', force: true})
     - name: Transformi la dosierojn al retpaĝoj
       run: |
+        echo "jenaj dosieroj ŝanĝiĝis kaj estos transformataj:"
         while read a; do
           echo "$a"
         done < ŝanĝitaj_dosieroj
@@ -41,10 +42,10 @@ jobs:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
     - name: Pull Docker image
       run: docker pull "docker.pkg.github.com/revuloj/voko-formiko/voko-formiko:latest"
+#    - name: Run image
+#      run: docker run -v $GITHUB_WORKSPACE:/workspace docker.pkg.github.com/revuloj/voko-formiko/voko-formiko:latest ls -l /workspace
     - name: Run image
-      run: docker run -v $GITHUB_WORKSPACE:/workspace docker.pkg.github.com/revuloj/voko-formiko/voko-formiko:latest ls -l /workspace
-    - name: Run image
-      run: docker run -v $GITHUB_WORKSPACE:/workspace --entrypoint=formiko docker.pkg.github.com/revuloj/voko-formiko/voko-formiko:latest -Dart-listo=/workspace/ŝanĝitaj_dosieroj art-listo
+      run: docker run -v $GITHUB_WORKSPACE:/workspace docker.pkg.github.com/revuloj/voko-formiko/voko-formiko:latest formiko -Dart-listo=/workspace/ŝanĝitaj_dosieroj art-listo
 
 #    - name: Formiko-testo
 #      uses: docker://docker.pkg.github.com/revuloj/voko-formiko/voko-formiko:latest
