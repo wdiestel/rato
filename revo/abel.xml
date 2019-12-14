@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <!DOCTYPE vortaro SYSTEM "../dtd/vokoxml.dtd">
 
-<vortaro>
+<vortaro >
 <art mrk="$Id: abel.xml,v 1.77 2019/06/30 07:47:08 revo Exp $">
 <kap>
   <ofc>*</ofc><rad>abel</rad>/o
 </kap>
 
-<drv mrk="abel.0o" >
+<drv mrk="abel.0o">
   <kap><ofc>*</ofc><tld/>o</kap>
   <snc mrk="abel.0o.ZOO">
     <uzo tip="fak">ZOO</uzo>

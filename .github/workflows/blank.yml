@@ -45,7 +45,7 @@ jobs:
 #    - name: Run image
 #      run: docker run -v $GITHUB_WORKSPACE:/workspace docker.pkg.github.com/revuloj/voko-formiko/voko-formiko:latest ls -l /workspace
     - name: Run image
-      run: docker run -v $GITHUB_WORKSPACE:/home/formiko docker.pkg.github.com/revuloj/voko-formiko/voko-formiko:latest formiko -Dart-listo=/home/formiko/ŝanĝitaj_dosieroj art-listo
+      run: docker run -v $GITHUB_WORKSPACE/revo:/home/formiko/revo/xml -v $GITHUB_WORKSPACE:/ws docker.pkg.github.com/revuloj/voko-formiko/voko-formiko:latest formiko -Dart-listo=/ws/ŝanĝitaj_dosieroj art-listo
 
 #    - name: Formiko-testo
 #      uses: docker://docker.pkg.github.com/revuloj/voko-formiko/voko-formiko:latest
