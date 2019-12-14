@@ -8,25 +8,31 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v1
+    - name: Elŝutu la dosierojn 
+      uses: actions/checkout@v1
     - name: Eltrovu, kiuj XML-dosieroj ŝanĝiĝis
-      run: git show --name-only --oneline formikita.. | grep -E "^[^ ]+\.xml$" | sort | uniq > ŝanĝitaj_dosieroj
+      run:    git show --name-only --oneline formikita.. | grep -E "^[^ ]+\.xml$" | sort | uniq > ŝanĝitaj_dosieroj
     - name: Rezulto de antaŭa paŝo...
-      run: cat ŝanĝitaj_dosieroj
+      run:    cat ŝanĝitaj_dosieroj
     - name: Docker hello world!
       uses: docker://ubuntu:latest
       with:
         args: ls -lf
     - uses: actions/github-script@0.3.0
+      name: Movu etikedon al la nuna kap-pozicio
       with:
         github-token: ${{secrets.GITHUB_TOKEN}}
         debug: true
         script: |
           const ref = await github.git.getRef({...context.repo, ref: 'heads/master'})
           const sha = ref.data.object.sha
-          console.log(sha)
+          console.log('head is: '+sha)
           await github.git.updateRef({...context.repo, sha: sha, ref: 'tags/formikita', force: true})
-
+    - name Transformi la dosierojn al retpaĝoj
+      run: |
+        while read a; do
+          echo "$a"
+        done < ŝanĝitaj_dosieroj
 #    - uses: actions/github-script@0.3.0
 #      with:
 #        github-token: ${{secrets.GITHUB_TOKEN}}
