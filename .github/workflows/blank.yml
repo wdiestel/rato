@@ -28,7 +28,7 @@ jobs:
           const sha = ref.data.object.sha
           console.log('head is: '+sha)
           await github.git.updateRef({...context.repo, sha: sha, ref: 'tags/formikita', force: true})
-    - name Transformi la dosierojn al retpaĝoj
+    - name: Transformi la dosierojn al retpaĝoj
       run: |
         while read a; do
           echo "$a"
