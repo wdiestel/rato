@@ -41,11 +41,14 @@ jobs:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
     - name: Pull Docker image
       run: docker pull "docker.pkg.github.com/revuloj/voko-formiko/voko-formiko:latest"
-    - name: Formiko-testo
-      uses: docker://docker.pkg.github.com/revuloj/voko-formiko/voko-formiko:latest
-      with:
-        entrypoint: formiko
-        args: art-helpo
+    - name: Run image
+      run: docker run -it -d -v $GITHUB_WORKSPACE:/workspace -w /workspace --entrypoint=formiko docker.pkg.github.com/revuloj/voko-formiko/voko-formiko:latest art-helpo
+
+#    - name: Formiko-testo
+#      uses: docker://docker.pkg.github.com/revuloj/voko-formiko/voko-formiko:latest
+#      with:
+#        entrypoint: formiko
+#        args: art-helpo
        
 #    - uses: actions/github-script@0.3.0
 #      with:
