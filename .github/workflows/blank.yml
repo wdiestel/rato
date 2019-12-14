@@ -33,6 +33,14 @@ jobs:
         while read a; do
           echo "$a"
         done < ŝanĝitaj_dosieroj
+# https://github.community/t5/GitHub-Actions/Use-docker-images-from-GitHub-Package-Registry/td-p/30407    
+# https://github.com/actions/starter-workflows/blob/master/ci/docker-push.yml    
+    - name: Docker saluto
+      run: docker login docker.pkg.github.com -u $GITHUB_ACTOR -p $GITHUB_TOKEN
+      env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+    - name: Pull Docker image
+      run: docker pull "docker.pkg.github.com/revuloj/voko-formiko/voko-formiko:latest"
     - name: Formiko-testo
       uses: docker://docker.pkg.github.com/revuloj/voko-formiko/voko-formiko:latest
       with:
