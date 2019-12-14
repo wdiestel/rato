@@ -11,7 +11,7 @@ jobs:
     - name: Elŝutu la dosierojn 
       uses: actions/checkout@v1
     - name: Eltrovu, kiuj XML-dosieroj ŝanĝiĝis
-      run:    git show --name-only --oneline formikita.. | grep -E "^/revo/xml/[^ ]+\.xml$" | sort | uniq > ŝanĝitaj_dosieroj
+      run:    git show --name-only --oneline formikita.. | grep -E "^/revo/[^ ]+\.xml$" | sort | uniq > ŝanĝitaj_dosieroj
     - name: Rezulto de antaŭa paŝo...
       run:    cat ŝanĝitaj_dosieroj
     - name: Docker hello world!
