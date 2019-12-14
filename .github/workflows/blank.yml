@@ -11,7 +11,7 @@ jobs:
     - name: Elŝutu la dosierojn 
       uses: actions/checkout@v1
     - name: Eltrovu, kiuj XML-dosieroj ŝanĝiĝis
-      run:    git show --name-only --oneline formikita.. | grep -E "^[^ ]+\.xml$" | sort | uniq > ŝanĝitaj_dosieroj
+      run:    git show --name-only --oneline formikita.. | grep -E "^/revo/xml/[^ ]+\.xml$" | sort | uniq > ŝanĝitaj_dosieroj
     - name: Rezulto de antaŭa paŝo...
       run:    cat ŝanĝitaj_dosieroj
     - name: Docker hello world!
@@ -45,7 +45,7 @@ jobs:
 #    - name: Run image
 #      run: docker run -v $GITHUB_WORKSPACE:/workspace docker.pkg.github.com/revuloj/voko-formiko/voko-formiko:latest ls -l /workspace
     - name: Run image
-      run: docker run -v $GITHUB_WORKSPACE:/workspace docker.pkg.github.com/revuloj/voko-formiko/voko-formiko:latest formiko -Dart-listo=/workspace/ŝanĝitaj_dosieroj art-listo
+      run: docker run -v $GITHUB_WORKSPACE:/home/formiko docker.pkg.github.com/revuloj/voko-formiko/voko-formiko:latest formiko -Dart-listo=/home/formiko/ŝanĝitaj_dosieroj art-listo
 
 #    - name: Formiko-testo
 #      uses: docker://docker.pkg.github.com/revuloj/voko-formiko/voko-formiko:latest
