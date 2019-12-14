@@ -33,6 +33,12 @@ jobs:
         while read a; do
           echo "$a"
         done < ŝanĝitaj_dosieroj
+    - name: Formiko-testo
+      uses: docker://docker.pkg.github.com/revuloj/voko-formiko/voko-formiko:latest
+      with:
+        entrypoint: formiko
+        args: art-helpo
+       
 #    - uses: actions/github-script@0.3.0
 #      with:
 #        github-token: ${{secrets.GITHUB_TOKEN}}
