@@ -1,6 +1,9 @@
 name: hello-world
 
-on: [push]
+on:
+  push:
+    branches:
+      - master
 
 jobs:
   build:
@@ -15,7 +18,7 @@ jobs:
 #        ref: 'master'
 
     - name: Eltrovu, kiuj XML-dosieroj ŝanĝiĝis
-      run:    git show --name-only --oneline formikita.. | grep -E "^revo/[^ /]+\.xml$" | sort | uniq > ŝanĝitaj_dosieroj
+      run:    git show --name-only --oneline formikita.. | grep -E "^revo/[^ /]+\.xml$" | sed 's/^revo\///g' | sort | uniq > ŝanĝitaj_dosieroj
     - name: Rezulto de antaŭa paŝo...
       run:    cat ŝanĝitaj_dosieroj
     - name: Docker hello world!
