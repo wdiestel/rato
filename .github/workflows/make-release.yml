@@ -22,7 +22,7 @@ jobs:
     steps:
     - name: "Hodiaŭ..."
       run: |
-        echo "::set-env name=TODAY::'v'$(date +'%Y-%m-%d')"
+        echo "::set-env name=TODAY::v$(date +'%Y-%m-%d')"
     - name: "Eĥo..."
       run: |
         echo $TODAY
