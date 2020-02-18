@@ -45,7 +45,9 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,            
               ref: 'heads/master'})
-          console.log('ref is: '+ref)
+          console.log('ref is:... ')
+          console.log(ref)
+          console.log(ref.data)
 
 #          const ref = await github.git.getRef({
 #             owner: context.repo.owner,
