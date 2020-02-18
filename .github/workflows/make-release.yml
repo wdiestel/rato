@@ -41,10 +41,11 @@ jobs:
         debug: true
         script: |
           console.log(context.repo)
-          github.git.getRef({
+          const ref = github.git.getRef({
               owner: context.repo.owner,
               repo: context.repo.repo,            
               ref: 'heads/master'})
+          console.log('ref is: '+ref)
 
 #          const ref = await github.git.getRef({
 #             owner: context.repo.owner,
