@@ -41,9 +41,9 @@ jobs:
         debug: true
         script: |
           console.log(...context)
-          const ref = await github.git.getRef({...context.repo, ref: 'heads/master'})
+          const ref = github.git.getRef({...context.repo, ref: 'heads/master'})
           const sha = ref.data.object.sha
           console.log('head is: '+sha)
-          await github.git.updateRef({...context.repo, sha: sha, ref: ${{env.TAG}}, force: true})
+          github.git.updateRef({...context.repo, sha: sha, ref: '${{env.TAG}}', force: true})
   
        
