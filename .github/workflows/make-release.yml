@@ -13,6 +13,7 @@ on:
 
 # https://github.com/actions/create-release
 # https://help.github.com/en/actions/reference/development-tools-for-github-actions
+# https://github.com/actions/github-script
 
 jobs:
   build:
@@ -33,15 +34,16 @@ jobs:
 #      with:
 #        ref: 'master'
 
-    - uses: actions/github-script@0.3.0
+    - uses: actions/github-script@0.5.0
       name: Donu etikedon al la nuna kap-pozicio
       with:
         github-token: ${{secrets.GITHUB_TOKEN}}
         debug: true
         script: |
+          console.log(...context)
           const ref = await github.git.getRef({...context.repo, ref: 'heads/master'})
           const sha = ref.data.object.sha
           console.log('head is: '+sha)
-          await github.git.updateRef({...context.repo, sha: sha, ref: ...context.env.TAG, force: true})
+          await github.git.updateRef({...context.repo, sha: sha, ref: ${{env.TAG}}, force: true})
   
        
