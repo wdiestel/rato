@@ -40,12 +40,20 @@ jobs:
         github-token: ${{secrets.GITHUB_TOKEN}}
         debug: true
         script: |
-          const ref = github.git.getRef({
+          console.log(context.repo)
+          await github.git.getRef({
               owner: context.repo.owner,
               repo: context.repo.repo,            
               ref: 'heads/master'})
-          const sha = ref.data.object.sha
-          console.log('head is: '+sha)
+
+#          const ref = await github.git.getRef({
+#             owner: context.repo.owner,
+#             repo: context.repo.repo,            
+#             ref: 'heads/master'})
+
+
+#          const sha = ref.data.object.sha
+#          console.log('head is: '+sha)
 
 #          await github.git.updateRef({...context.repo.repo, sha: sha, ref: '${{env.TAG}}', force: true})  
 #          console.log(...context)
