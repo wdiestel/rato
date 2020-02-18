@@ -41,7 +41,7 @@ jobs:
         debug: true
         script: |
           console.log(context.repo)
-          await github.git.getRef({
+          github.git.getRef({
               owner: context.repo.owner,
               repo: context.repo.repo,            
               ref: 'heads/master'})
