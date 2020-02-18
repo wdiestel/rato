@@ -24,7 +24,7 @@ jobs:
     - name: "Hodiaŭ..."
       run: |
         echo "::set-env name=TODAY::$(date +'%Y-%m-%d')"
-        echo "::set-env name=TAG::tags/v$(date +'%Y-%m-%d')"
+        echo "::set-env name=TAG::v$(date +'%Y-%m-%d')"
     - name: "Eĥo..."
       run: |
         echo $TAG
@@ -51,7 +51,7 @@ jobs:
              owner: context.repo.owner,
              repo: context.repo.repo,            
              sha: sha,
-             ref: '${{env.TAG}}'})
+             ref: 'refs/tags/v${{env.TODAY}}'})
           console.log(result)
 
 
