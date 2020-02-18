@@ -1,0 +1,46 @@
+name: make-release
+
+on:
+  push:
+    branches:
+    - master
+  # ĉiulunde matene
+  # * is a special character in YAML so you have to quote this string
+  #- cron:  '15 8 * * 1'
+  #- cron:  '59 19 * * 1'
+  #branches:
+  #  - master
+
+# https://github.com/actions/create-release
+# https://help.github.com/en/actions/reference/development-tools-for-github-actions
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: "Hodiaŭ..."
+      run: |
+        echo "::set-env name=TODAY::$(date +'%Y-%m-%d')"
+    - name: "Eĥo..."
+      run: |
+        echo $TODAY
+#    - name: Elŝutu la dosierojn 
+#      uses: actions/checkout@v1
+# se ni movas tag formikita la skripto revenas tien, sed verŝajne la problemo ne okazas tie ĉi sed jam ĉe la kadra Github actions - reago...
+#      with:
+#        ref: 'master'
+
+#    - uses: actions/github-script@0.3.0
+#      name: Donu etikedon al la nuna kap-pozicio
+#      with:
+#        github-token: ${{secrets.GITHUB_TOKEN}}
+#        debug: true
+#        script: |
+#          const ref = await github.git.getRef({...context.repo, ref: 'heads/master'})
+#          const sha = ref.data.object.sha
+#          console.log('head is: '+sha)
+#          await github.git.updateRef({...context.repo, sha: sha, ref: 'tags/v'+...context.env.TODAY, force: true})
+#  
+       
