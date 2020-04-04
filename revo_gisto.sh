@@ -7,33 +7,36 @@
 
 api=https://api.github.com
 owner=reta-vortaro
-incoming=incoming
+gists=gists
 xml=xml
 
-mkdir -p ${incoming}
+mkdir -p ${gists}
 mkdir -p ${xml}
-rm ${incoming}/*
+rm ${gists}/*
 #curl -H "Authorization: token $tk" -X GET ${api}/gists | jq '.[] | { description, files: [ (.files[]|values) ][0]} '
 
 # ekstraktu la unuan dosieron el ĉiuj gistoj...
+echo "## preni ${api}/gists..."
 curl -H "Authorization: token ${REVO_TOKEN}" -X GET ${api}/gists | \
     jq -c '.[] | { id, description, updated_at } + [ (.files[]|values) ][0]' | \
 while IFS=$"\n" read -r line; do
     id=$(echo $line | jq -r '.id')
     fn=$(echo $line | jq -r '.filename')
-    echo "skribas giston por \"${fn}\" al incoming/${id}"
-    echo $line | jq '.' > ${incoming}/${id}
+    echo "# gisto \"${fn}\" -> ${gists}/${id}"
+    echo $line | jq '.' > ${gists}/${id}
 done
 
 # elŝutu ĉiujn dosierojn laŭ la gisto-listo
-for gist in ${incoming}/*; do
+for gist in ${gists}/*; do
   id=$(cat ${gist} | jq -r '.id')
   sz=$(cat ${gist} | jq -r '.size')
-  if [[ sz -lt 1000000 ]]; then
+  tp=$(cat ${gist} | jq -r '.type')
+  if [[ "${tp}" == "application/xml" && "${sz}" -lt 1000000 ]]; then
     url=$(cat ${gist} | jq -r '.raw_url')
-    echo "elŝutante ${url}..."
+    echo "## preni ${url}..."
     curl -o "${xml}/${id}.xml" -H "Authorization: token ${REVO_TOKEN}" "${url}"
   else
-    echo "ERARO: gisto ${id} estas tro granda: ${sz}"
+    echo "ERARO: gisto ${id} havas malĝustan tipon aŭ estas tro granda:"
+    cat ${gist}
   fi
 done
