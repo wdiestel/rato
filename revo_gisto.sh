@@ -1,14 +1,28 @@
 #!/bin/bash
 
+# Github API, Auth
 # https://developer.github.com/apps/building-github-apps/authenticating-with-github-apps/
 # https://developer.github.com/changes/2020-02-14-deprecating-password-auth/
 
+# JQ en bash-skriptoj
 # https://stackoverflow.com/questions/43192556/using-jq-with-bash-to-run-command-for-each-object-in-array
+
+# HMAC, JWT w. OpenSSL / bash
+# https://stackoverflow.com/questions/7285059/hmac-sha1-in-bash
+# https://willhaley.com/blog/generate-jwt-with-bash/
 
 api=https://api.github.com
 owner=reta-vortaro
 gists=gists
 xml=xml
+
+getartid () {
+    local file="${xml}/$1"
+    local idline=$(grep "[$]Id" ${file})
+    local id1=${idline#*\"$}
+    local id=${id1%$\"*}
+    echo "$id"
+}
 
 mkdir -p ${gists}
 mkdir -p ${xml}
@@ -35,6 +49,7 @@ for gist in ${gists}/*; do
     url=$(cat ${gist} | jq -r '.raw_url')
     echo "## preni ${url}..."
     curl -o "${xml}/${id}.xml" -H "Authorization: token ${REVO_TOKEN}" "${url}"
+    art_id=$(getartid "${id}.xml") && echo "Id: ${art_id}"
   else
     echo "ERARO: gisto ${id} havas malĝustan tipon aŭ estas tro granda:"
     cat ${gist}
