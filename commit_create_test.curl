@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# https://developer.github.com/apps/building-github-apps/authenticating-with-github-apps/
+# https://developer.github.com/changes/2020-02-14-deprecating-password-auth/
+
+api=https://api.github.com
+owner=revuloj
+repo=revo-fonto-testo
+path=revo/hund_1.xml
+
+content=$(base64 -w0 upload/hund.xml)
+
+message=$(cat<<EOM
+{ "message": "+hundo", 
+  "committer": 
+  { "name": "${owner}",
+    "email": "diestel@steloj.de"
+  },
+  "content": "${content}"
+}
+EOM
+)
+
+#echo $message
+
+curl -X PUT -H "Authorization: token ${REVO_TOKEN}"  -d "${message}" "${api}/repos/${owner}/${repo}/contents/${path}"
+
+

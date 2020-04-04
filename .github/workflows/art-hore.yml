@@ -1,5 +1,11 @@
 name: hello-world
 
+# FARENDA:
+# -  iom koncizigu komencajn paŝojn
+# - movu markon "formikita" post sukceso - kiel eviti danĝeron, ke intertempe alvenas novaj redaktoj - necesas ŝloso por procmail,
+#   aŭ fidu la tempo-intervalon...
+# - spegulo rezultintajn HTML-dosierojn al la servilo - por testi en iun alian lokon... 
+
 on:
   push:
     branches:
