@@ -25,7 +25,7 @@ jobs:
 
     - name: Rigardu la variablon
       run: |
-        echo "${{steps.set-konfirmo.outputs.KONFIRMO"           
+        echo "${{steps.set-konfirmo.outputs.KONFIRMO}}"           
 
   j2:
     needs: j1
@@ -34,4 +34,4 @@ jobs:
     steps:
     - name: Rigardu la variablon
       run: |
-        echo "${{needs.j1.outputs.KONFIRMO"           
+        echo "${{needs.j1.outputs.KONFIRMO}}"           
