@@ -1,0 +1,37 @@
+name: test-needs-output
+
+on:
+  push:
+    branches:
+    - master  
+
+jobs:
+
+  j1:
+    runs-on: ubuntu-latest
+    outputs:
+      KONFIRMO: ${{ steps.set-konfirmo.outputs.KONFIRMO }}
+    steps:
+    - name: Kreu dosieron por testo ...
+      run: |
+        mkdir .log
+        echo "konfirmo" > .log/mail_sent.log
+
+    - name: Rigardu la protokolon 
+      id: set-konfirmo
+      run: |
+        ls -l .tmp/ .log/
+        echo "::set-output name=KONFIRMO::$(grep -l '\"konfirmo\"' .log/mail_sent*)"   
+
+    - name: Rigardu la variablon
+      run: |
+        echo "${{steps.set-konfirmo.outputs.KONFIRMO"           
+
+  j2:
+    needs: j1
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Rigardu la variablon
+      run: |
+        echo "${{needs.j1.outputs.KONFIRMO"           
