@@ -20,7 +20,7 @@ jobs:
     - name: Rigardu la protokolon 
       id: set-konfirmo
       run: |
-        ls -l .tmp/ .log/
+        ls -l .log/
         echo "::set-output name=KONFIRMO::$(grep -l '\"konfirmo\"' .log/mail_sent*)"   
 
     - name: Rigardu la variablon
