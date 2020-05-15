@@ -17,7 +17,7 @@ jobs:
     - name: Kreu dosieron por testo ...
       run: |
         mkdir .log
-        echo "konfirmo" > .log/mail_sent.log
+        echo "\"rezulot\":\"konfirmo\""" > .log/mail_sent.log
         ls -l .log
         cat .log/mail_sent.log
 
@@ -25,8 +25,8 @@ jobs:
       id: set_konfirmo
       run: |
         ls -l .log/
-        grep '\"konfirmo\"' .log/mail_sent*
-        echo "::set-output name=KONFIRMO::$(grep '\"konfirmo\"' .log/mail_sent*)"
+        grep -l '\"konfirmo\"' .log/mail_sent*
+        echo "::set-output name=KONFIRMO::$(grep -l '\"konfirmo\"' .log/mail_sent*)"
         echo "::set-output name=TESTO::$(echo testo)"
 
     - name: Rigardu la variablon
