@@ -10,7 +10,7 @@ jobs:
   j1:
     runs-on: ubuntu-latest
     outputs:
-      KONFIRMO: ${{ steps.set-konfirmo.outputs.KONFIRMO }}
+      KONFIRMO: ${{ steps.set_konfirmo.outputs.KONFIRMO }}
 
     steps:
     - name: Kreu dosieron por testo ...
@@ -21,14 +21,14 @@ jobs:
         cat .log/mail_sent.log
 
     - name: Rigardu la protokolon 
-      id: set-konfirmo
+      id: set_konfirmo
       run: |
         ls -l .log/
         echo "::set-output name=KONFIRMO::$(grep -l '\"konfirmo\"' .log/mail_sent*)"
 
     - name: Rigardu la variablon
       run: |
-        echo "${{steps.set-konfirmo.outputs.KONFIRMO}}"           
+        echo "${{steps.set_konfirmo.outputs.KONFIRMO}}"           
 
   j2:
     needs: j1
