@@ -17,7 +17,7 @@ jobs:
     - name: Kreu dosieron por testo ...
       run: |
         mkdir .log
-        echo "\"rezulot\":\"konfirmo\""" > .log/mail_sent.log
+        echo "\"rezulto\":\"konfirmo\"" > .log/mail_sent.log
         ls -l .log
         cat .log/mail_sent.log
 
