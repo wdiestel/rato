@@ -25,7 +25,8 @@ jobs:
       id: set_konfirmo
       run: |
         ls -l .log/
-        echo "::set-output name=KONFIRMO::$(grep -l '\"konfirmo\"' .log/mail_sent*)"
+        grep '\"konfirmo\"' .log/mail_sent*
+        echo "::set-output name=KONFIRMO::$(grep '\"konfirmo\"' .log/mail_sent*)"
         echo "::set-output name=TESTO::$(echo testo)"
 
     - name: Rigardu la variablon
