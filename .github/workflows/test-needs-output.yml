@@ -7,11 +7,11 @@ on:
 
 jobs:
 
-  j1:
+  j-1:
     runs-on: ubuntu-latest
     outputs:
-      KONFIRMO: ${{ steps.set_konfirmo.outputs.KONFIRMO }}
-      TESTO: ${{ steps.set_konfirmo.outputs.TESTO }}
+      KONFIRMO: ${{ steps.set-konfirmo.outputs.KONFIRMO }}
+      TESTO: ${{ steps.set-konfirmo.outputs.TESTO }}
 
     steps:
     - name: Kreu dosieron por testo ...
@@ -22,24 +22,25 @@ jobs:
         cat .log/mail_sent.log
 
     - name: Rigardu la protokolon 
-      id: set_konfirmo
+      id: set-konfirmo
       run: |
         ls -l .log/
-        grep -l '\"konfirmo\"' .log/mail_sent*
+        # grep -l '\"konfirmo\"' .log/mail_sent*
         echo "::set-output name=KONFIRMO::$(grep -l '\"konfirmo\"' .log/mail_sent*)"
         echo "::set-output name=TESTO::$(echo testo)"
 
     - name: Rigardu la variablon
       run: |
-        echo "K: ${{steps.set_konfirmo.outputs.KONFIRMO}}"           
-        echo "T: ${{steps.set_konfirmo.outputs.TESTO}}"           
+        echo "K: ${{steps.set-konfirmo.outputs.KONFIRMO}}"           
+        echo "T: ${{steps.set-konfirmo.outputs.TESTO}}"           
 
-  j2:
-    needs: j1
+  j-2:
+    needs: j-1
+    if: ${{needs.j-1.outputs.KONFIRMO}}
     runs-on: ubuntu-latest
 
     steps:
     - name: Rigardu la variablon
       run: |
-        echo "K: ${{needs.j1.outputs.KONFIRMO}}"           
-        echo "T: ${{needs.j1.outputs.TESTO}}"           
+        echo "K: ${{needs.j-1.outputs.KONFIRMO}}"           
+        echo "T: ${{needs.j-1.outputs.TESTO}}"           
