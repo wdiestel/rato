@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       KONFIRMO: ${{ steps.set_konfirmo.outputs.KONFIRMO }}
+      TESTO: ${{ steps.set_konfirmo.outputs.TESTO }}
 
     steps:
     - name: Kreu dosieron por testo ...
@@ -25,10 +26,12 @@ jobs:
       run: |
         ls -l .log/
         echo "::set-output name=KONFIRMO::$(grep -l '\"konfirmo\"' .log/mail_sent*)"
+        echo "::set-output name=TESTO::$(echo testo)"
 
     - name: Rigardu la variablon
       run: |
-        echo "${{steps.set_konfirmo.outputs.KONFIRMO}}"           
+        echo "K: ${{steps.set_konfirmo.outputs.KONFIRMO}}"           
+        echo "T: ${{steps.set_konfirmo.outputs.TESTO}}"           
 
   j2:
     needs: j1
@@ -37,4 +40,5 @@ jobs:
     steps:
     - name: Rigardu la variablon
       run: |
-        echo "${{needs.j1.outputs.KONFIRMO}}"           
+        echo "K: ${{needs.j1.outputs.KONFIRMO}}"           
+        echo "T: ${{needs.j1.outputs.TESTO}}"           
